@@ -248,7 +248,7 @@
                         type: 'effectScatter',
                         coordinateSystem: 'bmap',
                         data: convertData(data.sort(function (a, b) {
-                            return b.value - a.value;
+                            return a.value - b.value;
                         })),
                         symbolSize: function (val) {
                             return 20;
@@ -281,7 +281,7 @@
                         type: 'lines',
                         coordinateSystem: 'bmap',
                         data: convertData1(jj(data.sort(function (a, b) {
-                            return b.value - a.value;
+                            return a.value - b.value;
                         }))),
                         effect: {
                             show: true,
