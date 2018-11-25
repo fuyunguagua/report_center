@@ -5,7 +5,7 @@ class Constant:
     #database
     HOST = 'localhost'
     USER = 'toor'
-    PASS = '123456'
+    PASS = '12345678'
 
     PIROR_WATERMARK = 0
 

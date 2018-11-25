@@ -107,7 +107,7 @@
                 },
                 bmap: {
                     center: [104.114129, 37.550339],
-                    zoom: 5,
+                    zoom: 3,
                     roam: true,
                     mapStyle: {
                         styleJson: [
@@ -249,7 +249,7 @@
                         coordinateSystem: 'bmap',
                         data: convertData(data.sort(function (a, b) {
                             return b.value - a.value;
-                        }).slice(0, 6)),
+                        })),
                         symbolSize: function (val) {
                             return 20;
                         },
@@ -282,7 +282,7 @@
                         coordinateSystem: 'bmap',
                         data: convertData1(jj(data.sort(function (a, b) {
                             return b.value - a.value;
-                        })).slice(0,5)),
+                        }))),
                         effect: {
                             show: true,
                             period: 6,
@@ -318,7 +318,7 @@
                         z: -10
                     }
                 ]
-            };;
+            };
 
             function job() {
                 $.ajax({
@@ -339,7 +339,7 @@
             if (option && typeof option === "object") {
                 myChart.setOption(option, true);
             }
-            {#setInterval("job()", "60000");#}
+            setInterval("job()", "60000");
        </script>
    </body>
 </html>
