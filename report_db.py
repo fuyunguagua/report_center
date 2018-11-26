@@ -1,4 +1,5 @@
 from config import db
+from MySQLdb import OperationalError
 
 def wrap(content):
     return '"' + content + '"'
@@ -15,7 +16,7 @@ def witer_to_db(request_dict):
     try:
         db.commit()
         cursor.close()
-    except Exception as e:
+    except OperationalError as e:
         print sql
         print e
 
