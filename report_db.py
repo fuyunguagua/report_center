@@ -12,7 +12,14 @@ def witer_to_db(request_dict):
                wrap(request_dict['dst_ip']),
                wrap(request_dict['cur_ip']))
     cursor.execute(sql)
-    db.commit()
+    try:
+        db.commit()
+        cursor.close()
+    except Exception as e:
+        print sql
+        print e
+
+
 
 def read_from_db(watermark):
     cursor = db.cursor()
@@ -27,7 +34,9 @@ def read_from_db(watermark):
         item['dst_ip'] = row[4]
         item['cur_ip'] = row[5]
         result.append(item)
+    cursor.close()
     return result
+
 
 def insert_ip_info(ip, json):
     cursor = db.cursor()
@@ -38,6 +47,8 @@ def insert_ip_info(ip, json):
                wrap(str(json['lat'])))
     cursor.execute(sql)
     db.commit()
+    cursor.close()
+
 
 def get_ip_info_from_db(ip):
     cursor = db.cursor()
@@ -49,4 +60,5 @@ def get_ip_info_from_db(ip):
         result['location'] = row[2]
         result['lon'] = row[3]
         result['lat'] = row[4]
+    cursor.close()
     return result
