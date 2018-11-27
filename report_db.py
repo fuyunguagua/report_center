@@ -51,7 +51,7 @@ def insert_ip_info(ip, json):
     cursor = db.cursor()
     sql = 'INSERT INTO ipInfo(`ip`,`location`,`lon`,`lat`) VALUES ({},{},{},{})'.\
         format(wrap(ip),
-               wrap(','.join([json['city'], json['country']])),
+               wrap(','.join([json['city'].encode("utf-8"), json['country'].encode("utf-8")])),
                wrap(str(json['lon'])),
                wrap(str(json['lat'])))
     cursor.execute(sql)
