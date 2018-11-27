@@ -1,4 +1,4 @@
-from config import db, newDB
+from config import newDB
 from MySQLdb import OperationalError
 
 def wrap(content):
@@ -26,6 +26,8 @@ def witer_to_db(request_dict):
 
 
 def read_from_db(watermark):
+    db = newDB()
+    db.select_db("track_report")
     cursor = db.cursor()
     sql = 'select * from RECORD where `watermark`={} order by `TIMESTAMP`'.format(wrap(watermark))
     rows = cursor.fetchmany(cursor.execute(sql))
@@ -39,10 +41,13 @@ def read_from_db(watermark):
         item['cur_ip'] = row[5]
         result.append(item)
     cursor.close()
+    db.close()
     return result
 
 
 def insert_ip_info(ip, json):
+    db = newDB()
+    db.select_db("track_report")
     cursor = db.cursor()
     sql = 'INSERT INTO ipInfo(`ip`,`location`,`lon`,`lat`) VALUES ({},{},{},{})'.\
         format(wrap(ip),
@@ -52,9 +57,12 @@ def insert_ip_info(ip, json):
     cursor.execute(sql)
     db.commit()
     cursor.close()
+    db.close()
 
 
 def get_ip_info_from_db(ip):
+    db = newDB()
+    db.select_db("track_report")
     cursor = db.cursor()
     sql = 'select * from ipInfo where `IP`={}'.format(wrap(ip))
     rows = cursor.fetchmany(cursor.execute(sql))
@@ -65,4 +73,5 @@ def get_ip_info_from_db(ip):
         result['lon'] = row[3]
         result['lat'] = row[4]
     cursor.close()
+    db.close()
     return result

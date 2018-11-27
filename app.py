@@ -6,12 +6,18 @@ from localion_get import get_location
 
 app = Flask(__name__)
 
+ip_info_dict = {}
+
 @app.route('/report')
 def report():
+    global ip_info_dict
     request_dict = request.args
     witer_to_db(request_dict)
     detect_ip = request_dict['cur_ip']
-    ip_info = get_location(detect_ip)
+    ip_info = ip_info_dict.get(detect_ip)
+    if not ip_info:
+        ip_info = get_location(detect_ip)
+        ip_info_dict[detect_ip] = ip_info
     insert_ip_info(detect_ip, ip_info)
     return 'The request param you request are: ' + request.query_string
 

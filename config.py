@@ -9,12 +9,12 @@ class Constant:
 
     PIROR_WATERMARK = 0
 
-db = MySQLdb.connect(Constant.HOST, Constant.USER, Constant.PASS)
 
 def newDB():
     return MySQLdb.connect(Constant.HOST, Constant.USER, Constant.PASS)
 
 def init_database():
+    db = MySQLdb.connect(Constant.HOST, Constant.USER, Constant.PASS)
     cursor = db.cursor()
     try:
         cursor.execute("create database if "
@@ -50,5 +50,7 @@ def init_database():
         cursor.execute(sql)
     except Exception as e:
         pass
+    cursor.close()
+    db.close()
 
 init_database()
