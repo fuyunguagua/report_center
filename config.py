@@ -11,6 +11,9 @@ class Constant:
 
 db = MySQLdb.connect(Constant.HOST, Constant.USER, Constant.PASS)
 
+def newDB():
+    return MySQLdb.connect(Constant.HOST, Constant.USER, Constant.PASS)
+
 def init_database():
     cursor = db.cursor()
     try:

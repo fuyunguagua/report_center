@@ -1,10 +1,11 @@
-from config import db
+from config import db, newDB
 from MySQLdb import OperationalError
 
 def wrap(content):
     return '"' + content + '"'
 
 def witer_to_db(request_dict):
+    db = newDB()
     cursor = db.cursor()
     sql = 'INSERT INTO RECORD(`TIMESTAMP`,`WATERMARK`,`SRC_IP`,`DST_IP`,`CUR_IP`) VALUES ({},{},{},{},{})'.\
         format(wrap(request_dict['timestamp']),
@@ -16,6 +17,7 @@ def witer_to_db(request_dict):
     try:
         db.commit()
         cursor.close()
+        db.close()
     except OperationalError as e:
         print sql
         print e
