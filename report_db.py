@@ -6,6 +6,7 @@ def wrap(content):
 
 def witer_to_db(request_dict):
     db = newDB()
+    db.select_db("track_report")
     cursor = db.cursor()
     sql = 'INSERT INTO RECORD(`TIMESTAMP`,`WATERMARK`,`SRC_IP`,`DST_IP`,`CUR_IP`) VALUES ({},{},{},{},{})'.\
         format(wrap(request_dict['timestamp']),
