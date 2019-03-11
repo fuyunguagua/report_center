@@ -29,7 +29,7 @@ def show():
 
 @app.route('/tt')
 def tt():
-    return render_template("trace1.html")
+    return render_template("as.html")
 
 @app.route('/trace2')
 def trace2():
@@ -41,7 +41,7 @@ def trace2():
         location_info = get_ip_info_from_db(item['cur_ip'])
         data.append({"name":location_info['location'], "value":item['timestamp']})
         geoCoordMap[location_info['location']] = [location_info['lon'], location_info['lat']]
-    return render_template("trace2.html", title = 'Botnet Tracking! current watermark: {}'.format(cur_watermark), data = json.dumps(data), geoCoordMap = json.dumps(geoCoordMap))
+    return render_template("trace2.html", title = 'Botnet Tracking! {}'.format(cur_watermark), data = json.dumps(data), geoCoordMap = json.dumps(geoCoordMap), watermark = cur_watermark)
 
 def get_cur_watermark():
     watermark_index = int(time.time())/60 % 100000 - 1
