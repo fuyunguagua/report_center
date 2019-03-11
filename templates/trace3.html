@@ -319,7 +319,7 @@
                         coordinateSystem: 'bmap',
                         data: convertData(data.sort(function (a, b) {
                             return a.value - b.value;
-                        }).slice(data.length, data.length)),
+                        }).slice(data.length-1, data.length)),
                         symbolSize: function (val) {
                             return 20;
                         },
