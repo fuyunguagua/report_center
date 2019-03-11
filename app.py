@@ -45,7 +45,7 @@ def trace2():
 
 def get_cur_watermark():
     watermark_index = int(time.time())/60 % 100000 - 1
-    watermark_index = "w45873"
+    watermark_index = "45873"
     return ''.join(['w', str(watermark_index)])
 
 if __name__ == '__main__':
