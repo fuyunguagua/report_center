@@ -2,10 +2,24 @@
 <html style="height: 100%">
    <head>
        <meta charset="utf-8">
+       <style type="text/css">
+			h1 {font-size:60px;}
+			h2 {font-size:40px;}
+			p {font-size:100px;}
+			.b{
+				font-size:40px;
+				position:absolute;
+				bottom:100px;
+				text-decoration:none;
+			  }
+			.la{display:flex;
+    				justify-content:center;
+    				}
+		</style>
    </head>
    <body style="height: 100%; margin: 0">
        <div id="container" style="height: 100%"></div>
-       <div id="watermark_div">current watermark : {{ watermark }}</div>
+       <div id="watermark_div" class="la">Current Watermark : {{ watermark }}</div>
        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
