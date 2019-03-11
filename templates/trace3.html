@@ -245,13 +245,14 @@
                     }
                 },
                 series : [
+                    {#起点#}
                     {
                         name: 'location',
                         type: 'effectScatter',
                         coordinateSystem: 'bmap',
                         data: convertData(data.sort(function (a, b) {
                             return a.value - b.value;
-                        })),
+                        }).slice(0, 0)),
                         symbolSize: function (val) {
                             return 20;
                         },
@@ -305,6 +306,40 @@
                         itemStyle: {
                             normal: {
                                 color: '#ff0',
+                                shadowBlur: 10,
+                                shadowColor: '#ffffff'
+                            }
+                        },
+                        zlevel: 1
+                    },
+                    {##终点#}
+                    {
+                        name: 'location',
+                        type: 'effectScatter',
+                        coordinateSystem: 'bmap',
+                        data: convertData(data.sort(function (a, b) {
+                            return a.value - b.value;
+                        }).slice(data.length, data.length)),
+                        symbolSize: function (val) {
+                            return 20;
+                        },
+                        {#showEffectOn: 'emphasis',#}
+                        rippleEffect: {
+                            brushType: 'stroke'
+                        },
+                        hoverAnimation: true,
+                        animation: false,
+                        label: {
+                            normal: {
+                                color:'#ff0',
+                                formatter: '{b}',
+                                position: 'right',
+                                show: true
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#f00',
                                 shadowBlur: 10,
                                 shadowColor: '#ffffff'
                             }
