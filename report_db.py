@@ -97,7 +97,8 @@ def get_final_detection(position, num):
             result.append(item)
         if result:
             print 'Watermark {} final IP {}'.format(wrap('w' + str(position + i)), result[-1]['cur_ip'])
-            correct_num += 1
+            if result[-1]['cur_ip'] == '120.76.125.235':
+                correct_num += 1
         else:
             watermark_dispear_num += 1
     print 'Watermark dectecting success rate {}%'.format((correct_num / float(100 - watermark_dispear_num)) * 100)
