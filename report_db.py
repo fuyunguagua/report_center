@@ -82,7 +82,8 @@ def get_final_detection(position, num):
     db.select_db("track_report")
     cursor = db.cursor()
     for i in range(num):
-        sql = 'select * from RECORD where `watermark`={} order by `TIMESTAMP`'.format('w' + wrap(str(position + i)))
+        sql = 'select * from RECORD where `watermark`={} order by `TIMESTAMP`'.format(wrap('w' + str(position + i)))
+        print
         rows = cursor.fetchmany(cursor.execute(sql))
         result = []
         for row in rows:
