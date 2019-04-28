@@ -83,7 +83,6 @@ def get_final_detection(position, num):
     cursor = db.cursor()
     for i in range(num):
         sql = 'select * from RECORD where `watermark`={} order by `TIMESTAMP`'.format(wrap('w' + str(position + i)))
-        print
         rows = cursor.fetchmany(cursor.execute(sql))
         result = []
         for row in rows:
@@ -94,6 +93,6 @@ def get_final_detection(position, num):
             item['dst_ip'] = row[4]
             item['cur_ip'] = row[5]
             result.append(item)
-        print 'Watermark {} final IP {}'.format('w' + wrap(position + i), result[-1]['cur_ip'])
+        print 'Watermark {} final IP {}'.format(wrap('w' + str(position + i)), result[-1]['cur_ip'])
     cursor.close()
     db.close()
