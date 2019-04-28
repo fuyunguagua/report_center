@@ -81,6 +81,8 @@ def get_final_detection(position, num):
     db = newDB()
     db.select_db("track_report")
     cursor = db.cursor()
+    correct_num = 0
+    watermark_dispear_num = 0
     for i in range(num):
         sql = 'select * from RECORD where `watermark`={} order by `TIMESTAMP`'.format(wrap('w' + str(position + i)))
         rows = cursor.fetchmany(cursor.execute(sql))
@@ -93,6 +95,12 @@ def get_final_detection(position, num):
             item['dst_ip'] = row[4]
             item['cur_ip'] = row[5]
             result.append(item)
-        print 'Watermark {} final IP {}'.format(wrap('w' + str(position + i)), result[-1]['cur_ip'])
+        if result:
+            print 'Watermark {} final IP {}'.format(wrap('w' + str(position + i)), result[-1]['cur_ip'])
+            correct_num += 1
+        else:
+            watermark_dispear_num += 1
+    print 'Watermark dectecting success rate {}%'.format((correct_num / float(100 - watermark_dispear_num)) * 100)
+    print 'Watermark dectecting dispear rate {}%'.format(watermark_dispear_num)
     cursor.close()
     db.close()
