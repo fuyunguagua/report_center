@@ -75,3 +75,24 @@ def get_ip_info_from_db(ip):
     cursor.close()
     db.close()
     return result
+
+
+def get_final_detection(position, num):
+    db = newDB()
+    db.select_db("track_report")
+    cursor = db.cursor()
+    for i in range(num):
+        sql = 'select * from RECORD where `watermark`={} order by `TIMESTAMP`'.format('w' + wrap(position + i))
+        rows = cursor.fetchmany(cursor.execute(sql))
+        result = []
+        for row in rows:
+            item = {}
+            item['timestamp'] = row[1]
+            item['watermark'] = row[2]
+            item['src_ip'] = row[3]
+            item['dst_ip'] = row[4]
+            item['cur_ip'] = row[5]
+            result.append(item)
+        print 'Watermark {} final IP {}'.format('w' + wrap(position + i), result[-1]['cur_ip'])
+    cursor.close()
+    db.close()
